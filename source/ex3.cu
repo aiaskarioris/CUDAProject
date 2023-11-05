@@ -268,7 +268,7 @@ int main(int argc, char **argv){
     allocateAndLoad((void**)&dev_mat_vecProduct, mat_vec_productBytes, NULL);
     
     // Calculate kernel parameters
-    struct kernelParameters2D params;
+    struct kernelParameters1D params;
     findKernelParameters1D(Y, X, &params);
 
     // Calculate A*x; The result will be stored in dev_mat_vecProduct but will never be copied to the host as it is not needed
@@ -297,7 +297,6 @@ int main(int argc, char **argv){
     cudaEventElapsedTime(&(time[1]), event[3], event[4]);
     cudaEventElapsedTime(&(time[2]), event[0], event[5]);
     printf("\n* Kernel #1 time:  \t%.4f ms\n* Kernel #2 time:  \t%.4f ms\n", time[0], time[1]);
-    //printf("* Overall time elapsed: %.3f ms*/\n\n", time[2]); // Displays 0 for unknown reason
 
     // Destroy events
     for (unsigned int e = 0; e < 6; e++)

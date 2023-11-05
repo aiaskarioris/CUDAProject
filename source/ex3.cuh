@@ -11,7 +11,6 @@ inline void checkErrors__line(unsigned int __line){
 		printf("[ERROR] (Line %d) %s: %s\n", __line ,cudaGetErrorName(err), cudaGetErrorString(err));
 		exit(1);
 	}
-	
 }
 
 
@@ -77,7 +76,7 @@ __global__ void findBlockCount(unsigned int _input, unsigned int _maxBlockCount,
 
 /* Structure containing parameters for a kernel.
  * Only allows 1D block dimensions. */
-struct kernelParameters2D{
+struct kernelParameters1D{
 	unsigned blockSize;
 	unsigned blockCount_for_lines; 		// Matches number of lines (Y)
 	unsigned blockCount_for_columns; 	// Matches number of columns (X)
@@ -87,7 +86,7 @@ struct kernelParameters2D{
 /* Given the size of the input matrix determines the
  * optional number of blocks to use. Grids are 1D.
  * Calculated parameters are returned in ret. */
-void findKernelParameters1D(unsigned int _lines, unsigned int _columns, struct kernelParameters2D *ret){
+void findKernelParameters1D(unsigned int _lines, unsigned int _columns, struct kernelParameters1D *ret){
 	// Block size is standard
 	unsigned int blockSize = BLOCK_SIZE; 
 	ret->blockSize = blockSize;
